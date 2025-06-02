@@ -73,7 +73,34 @@ function addPost(text) {
     renderPosts();
 }
 
-// Initial render on page load
+// --- To-Do List Logic ---
+function getTodos() {
+    return JSON.parse(localStorage.getItem('todos') || '[]');
+}
+function saveTodos(todos) {
+    localStorage.setItem('todos', JSON.stringify(todos));
+}
+function renderTodos() {
+    const todoList = document.querySelector('.toDoContent ul');
+    if (!todoList) return;
+    todoList.innerHTML = '';
+    const todos = getTodos();
+    todos.forEach((todo, idx) => {
+        const li = document.createElement('li');
+        li.innerHTML = `📌 <span>${todo}</span> <button class="removeTodo" data-idx="${idx}" title="Remove" style="margin-left:10px;background:none;border:none;color:#d32f2f;font-size:1.1em;cursor:pointer;">✖</button>`;
+        todoList.appendChild(li);
+    });
+    // Remove event
+    todoList.querySelectorAll('.removeTodo').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const idx = parseInt(this.dataset.idx);
+            const todos = getTodos();
+            todos.splice(idx, 1);
+            saveTodos(todos);
+            renderTodos();
+        });
+    });
+}
 document.addEventListener('DOMContentLoaded', function() {
     renderPosts();
 
@@ -137,4 +164,101 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     }
+
+    // Dropdown logic for headerNav icons
+    // Dropdowns for headerNav
+    const navIcons = document.querySelectorAll('.headerNav ul li');
+    const dropdownData = [
+        {
+            title: "Messages",
+            content: `<div style="padding:16px;">No new messages.</div>`
+        },
+        {
+            title: "Notifications",
+            content: `<div style="padding:16px;">No new notifications.</div>`
+        },
+        {
+            title: "Menu",
+            content: `<div style="padding:16px;">
+                <a href="profilePage.html" style="display:block;margin-bottom:8px;">Profile</a>
+                <a href="#" style="display:block;margin-bottom:8px;">Settings</a>
+                <a href="#" style="display:block;">Logout</a>
+            </div>`
+        }
+    ];
+
+    // Remove any existing dropdowns
+    function closeDropdowns() {
+        document.querySelectorAll('.headerDropdown').forEach(d => d.remove());
+    }
+
+    navIcons.forEach((icon, i) => {
+        icon.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            closeDropdowns();
+
+            // Create dropdown
+            const dropdown = document.createElement('div');
+            dropdown.className = 'headerDropdown';
+            dropdown.innerHTML = `
+                <div class="headerDropdownTitle">${dropdownData[i].title}</div>
+                <div class="headerDropdownContent">${dropdownData[i].content}</div>
+            `;
+            const ul = icon.parentElement;
+            // Shift left a bit more (change -40 to -80 or adjust as needed)
+            dropdown.style.position = 'absolute';
+            dropdown.style.top = (icon.offsetTop + icon.offsetHeight + 8) + 'px';
+            dropdown.style.left = (icon.offsetLeft - 80) + 'px';
+            dropdown.style.minWidth = '180px';
+            dropdown.style.zIndex = 2000;
+
+            ul.appendChild(dropdown);
+
+            setTimeout(() => {
+                document.addEventListener('click', closeDropdowns, { once: true });
+            }, 10);
+        });
+    });
+
+    // To-Do Add Logic
+    const todoHeader = document.querySelector('.toDoHeader');
+    if (todoHeader) {
+        // Remove any existing input
+        const oldInput = document.querySelector('.toDoInput');
+        if (oldInput) oldInput.remove();
+
+        // Create input and place beside add +
+        const input = document.createElement('input');
+        input.className = 'toDoInput';
+        input.type = 'text';
+        input.placeholder = 'Add a to-do...';
+        input.style = 'margin-left:10px;width:60%;padding:6px 10px;border-radius:8px;border:1px solid #e0e0e0;font-size:1em;vertical-align:middle;';
+
+        // Insert input right before the add+ <p>
+        const addBtn = todoHeader.querySelector('p');
+        todoHeader.insertBefore(input, addBtn);
+
+        // Add click event to add+
+        addBtn.style.cursor = 'pointer';
+        addBtn.onclick = function() {
+            input.focus();
+            const value = input.value.trim();
+            if (value) {
+                const todos = getTodos();
+                todos.push(value);
+                saveTodos(todos);
+                renderTodos();
+                input.value = '';
+            }
+        };
+
+        // Also allow Enter key to add
+        input.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                addBtn.onclick();
+            }
+        });
+    }
+    renderTodos();
 });

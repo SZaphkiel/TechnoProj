@@ -40,6 +40,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between; 
+    position: relative; /* Add this */
 }
 .headerWrapper .headerNav ul li{
     margin: 0 10px;
@@ -518,4 +519,50 @@ body, .main, .mainContainer {
 .forYouContent {
     font-size: 1rem;
     color: #444;
+}
+
+/* header  */ 
+
+.headerDropdown {
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.15);
+    border: 1px solid #e0e0e0;
+    padding: 0;
+    min-width: 180px;
+    font-size: 1rem;
+    position: absolute;
+    animation: fadeIn 0.15s;
+}
+.headerDropdownTitle {
+    font-weight: bold;
+    padding: 12px 16px 8px 16px;
+    border-bottom: 1px solid #f0f0f0;
+    background: #f7fafd;
+    border-radius: 14px 14px 0 0;
+}
+.headerDropdownContent {
+    padding: 8px 0;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px);}
+    to { opacity: 1; transform: translateY(0);}
+}
+
+
+.toDoInput {
+    margin-left: 10px;
+    width: 60%;
+    padding: 6px 10px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    font-size: 1em;
+    outline: none;
+    vertical-align: middle;
+}
+.removeTodo:hover {
+    color: #fff !important;
+    background: #d32f2f !important;
+    border-radius: 50%;
+    transition: background 0.2s;
 }
