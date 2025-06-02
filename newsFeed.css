@@ -94,6 +94,10 @@
 .leftContainer {
     width: 270px;
     margin-right: 30px;
+    position: sticky;
+    top: 120px; 
+    align-self: flex-start;
+    z-index: 900;
 }
 
 .midContainer {
@@ -106,6 +110,10 @@
 
 .rightContainer {
     width: 270px;
+    position: sticky;
+    top: 120px; 
+    align-self: flex-start;
+    z-index: 900;
 }
 /* profile sample */
 .profileCard{
@@ -287,11 +295,227 @@
     background: #fff;
     border-radius: 20px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 20px 24px;
+    margin-bottom: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.samplePost .postHeader {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 0;
+}
+
+.samplePost .postProfile {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.samplePost .postProfile img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.samplePost .postProfileName,
+.samplePost .postProfileRole {
+    margin: 0;
+    padding: 0;
+    line-height: 1.2;
+}
+
+.samplePost .postProfileName {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.samplePost .postProfileRole {
+    font-size: 0.95rem;
+    color: #666;
+}
+
+.samplePost .postProfile {
+    flex-direction: row;
+}
+
+.samplePost .postProfile > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.samplePost .postContent {
+    margin: 12px 0 0 0;
+    font-size: 1rem;
+    color: #222;
+}
+
+.samplePost .interactionPanel {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    margin: 8px 0 0 0;
+}
+
+.samplePost .interactionPanel > div {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    padding: 6px 14px;
+    border-radius: 16px;
+    transition: background 0.15s;
+    font-size: 1rem;
+    color: #0072b8;
+    font-weight: 500;
+}
+
+.samplePost .interactionPanel > div:hover {
+    background: #f0f8ff;
+}
+
+.samplePost .interactionPanel img {
+    width: 20px;
+    height: 20px;
+    object-fit: contain;
+    margin-right: 2px;
+}
+.activeFriendsCard {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.activeFriendsHeader {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 4px;
+}
+
+.activeFriendsList ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.activeFriendsList li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    position: relative;
+}
+
+.activeFriendsList img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #0072b8;
+}
+
+.friendName {
+    flex: 1;
+    font-size: 1rem;
+    color: #222;
+}
+
+.activeDot {
+    width: 10px;
+    height: 10px;
+    background: #4caf50;
+    border-radius: 50%;
+    display: inline-block;
+    margin-left: 6px;
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px #4caf50;
+}
+
+body, .main, .mainContainer {
+    position: relative;
+    min-height: 100vh;
+    height: auto;
+    overflow: visible;
+}
+
+.leftContainer, .rightContainer {
+    position: sticky;
+    top: 120px;
+    align-self: flex-start;
+    z-index: 900;
+}
+
+/* Add or update this for the like button effect */
+.likeButton.liked {
+    background: #d0f0ff;
+    color: #0072b8;
+    box-shadow: 0 2px 8px rgba(0,114,184,0.10);
+    border: 1.5px solid #00b0ff;
+    transition: background 0.2s, border 0.2s, box-shadow 0.2s;
+}
+.likeButton.liked img {
+    filter: brightness(1.5) saturate(2) drop-shadow(0 0 2px #00b0ff);
+}
+
+/* For You, Trending, and Your Class Tabs/Card Styles */
+.foryouTabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.foryouTab {
+    background: #f3f7fa;
+    color: #0072b8;
+    border: none;
+    border-radius: 16px 16px 0 0;
+    padding: 8px 22px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+    outline: none;
+}
+
+.foryouTab.active, .foryouTab:hover {
+    background: #fff;
+    color: #005b94;
+    box-shadow: 0 -2px 8px rgba(0,114,184,0.08);
+}
+
+.foryou {
+    background: #fff;
+    border-radius: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
     padding: 24px 20px 20px 20px;
     margin-bottom: 20px;
-    width: fit-content
-}
-.samplePost .postProfile {
-    margin-right: 20px;
+    width: 100%;
     display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.forYouHeader {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 4px;
+}
+
+.forYouContent {
+    font-size: 1rem;
+    color: #444;
 }
