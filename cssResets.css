@@ -111,52 +111,10 @@ ul {
 /* Reset anchor text decoration */
 a {
   text-decoration: none;
+  color:black
 }
 
 /* Set default cursor for links */
 a:hover {
   cursor: pointer;
 }
-/* Header */
-.header {
-    background-color:#1c398d;
-    height: 90px;
-    position: sticky;
-    top: 0;
-    z-index: 1000; 
-}
-.headerContainer{
-    padding: 25px 100px;
-}
-.header .headerContainer .headerNav{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-} 
-#searchBar{
-    width: 250px;
-    height: 40px;
-    padding: 10px;
-    border: 1px solid transparent;
-    border-radius: 20px;
-}
-/* header right */
-.headerRight .headerIcons{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-}
-.headerIcons img{
-    width: 45px;
-    height: 45px;
-    border: 1px solid transparent;
-    border-radius: 25px;
-    padding: 10px;
-    background-color: aliceblue;
-}
-.headerIcons img:hover{
-    background-color: #b3b3b3;
-}
-
-/*  */
