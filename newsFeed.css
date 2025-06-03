@@ -566,3 +566,19 @@ body, .main, .mainContainer {
     border-radius: 50%;
     transition: background 0.2s;
 }
+.deletePostBtn {
+    background: none;
+    border: none;
+    color: #d32f2f;
+    font-size: 1.1em;
+    cursor: pointer;
+    margin-left: auto;
+    margin-right: 0;
+    transition: color 0.2s;
+    float: right;
+}
+.deletePostBtn:hover {
+    color: #fff;
+    background: #d32f2f;
+    border-radius: 50%;
+}

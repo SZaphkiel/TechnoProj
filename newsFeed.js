@@ -15,11 +15,13 @@ function renderPosts() {
     const midContainer = document.querySelector('.midContainer');
     const postingCard = document.querySelector('.postingCard');
 
+    // Remove previously rendered dynamic posts
+    document.querySelectorAll('.dynamicPost').forEach(el => el.remove());
 
     const posts = getSavedPosts();
     posts.forEach(postData => {
         const post = document.createElement('div');
-        post.className = 'samplePost';
+        post.className = 'samplePost dynamicPost';
         post.innerHTML = `
             <div class="postHeader">
                 <div class="postProfile">
@@ -29,6 +31,7 @@ function renderPosts() {
                         <div class="postProfileRole">${postData.role}</div>
                     </div>
                 </div>
+                ${postData.name === "John Patrick Tubino" ? `<button class="deletePostBtn" title="Delete Post">✖</button>` : ""}
             </div>
             <div class="postContent">
                 <p>${postData.text}</p>
@@ -56,6 +59,22 @@ function renderPosts() {
             postData.liked = this.classList.contains('liked');
             savePosts(posts);
         });
+
+        // Delete button event (if present)
+        const delBtn = post.querySelector('.deletePostBtn');
+        if (delBtn) {
+            delBtn.addEventListener('click', function() {
+                const allPosts = getSavedPosts();
+                const idx = allPosts.findIndex(
+                    p => p.name === postData.name && p.text === postData.text
+                );
+                if (idx !== -1) {
+                    allPosts.splice(idx, 1);
+                    savePosts(allPosts);
+                    renderPosts();
+                }
+            });
+        }
     });
 }
 
